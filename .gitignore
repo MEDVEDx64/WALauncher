@@ -1,0 +1,11 @@
+.vs
+.svn
+*.suo
+*.*sdf
+*.diagsession
+*.vspx
+*.cd
+bin
+obj
+packages
+*.bak
