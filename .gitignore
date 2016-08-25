@@ -9,3 +9,4 @@ bin
 obj
 packages
 *.bak
+wapkg-tools
