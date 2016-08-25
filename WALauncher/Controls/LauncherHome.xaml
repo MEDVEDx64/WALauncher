@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="WALauncher.Controls.LauncherHome"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WALauncher.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid Grid.Row="1">
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF05050F" Offset="0"/>
+                <GradientStop Color="#FF1C1C32" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Image Width="400" Height="400" Margin="-300,0,0,-200"
+               RenderOptions.BitmapScalingMode="NearestNeighbor"
+               Source="pack://application:,,,/WALauncher;component/Graphics/armageddon.png"/>
+    </Grid>
+</UserControl>

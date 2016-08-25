@@ -56,8 +56,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\DistroInstaller.xaml.cs">
+      <DependentUpon>DistroInstaller.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LauncherHome.xaml.cs">
+      <DependentUpon>LauncherHome.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\DelegateCommand.cs" />
+    <Compile Include="Utils\ViewModelBase.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Wapkg.cs" />
+    <Page Include="Controls\DistroInstaller.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\LauncherHome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -101,9 +117,7 @@
   <ItemGroup>
     <Resource Include="Graphics\run.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controls\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Graphics\armageddon.png" />
   </ItemGroup>

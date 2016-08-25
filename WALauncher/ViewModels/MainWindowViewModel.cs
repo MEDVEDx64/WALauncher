@@ -1,13 +1,17 @@
 ﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
+using WALauncher.Utils;
 
 namespace WALauncher.ViewModels
 {
-    public class MainWindowViewModel : INotifyPropertyChanged
+    public class MainWindowViewModel : ViewModelBase
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public MainWindowViewModel()
+        {
+        }
 
         ObservableCollection<string> dists = new ObservableCollection<string>();
+
+        public string SelectedDistro { get; set; }
 
         public ObservableCollection<string> Dists
         {
@@ -21,8 +25,5 @@ namespace WALauncher.ViewModels
                 return dists;
             }
         }
-
-        public string SelectedDistro { get; set; }
-        public object ActiveItem { get; set; }
     }
 }

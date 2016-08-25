@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WALauncher"
+        xmlns:controls="clr-namespace:WALauncher.Controls"
         xmlns:vm="clr-namespace:WALauncher.ViewModels"
         mc:Ignorable="d"
         Title="Worms Armageddon Launcher" Height="360" Width="448" ResizeMode="CanMinimize">
@@ -18,6 +19,16 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <TabControl Grid.Row="1" TabStripPlacement="Bottom" BorderThickness="0" Margin="-2,-2,-2,0">
+            <TabItem Header="Home">
+                <controls:LauncherHome/>
+            </TabItem>
+            <TabItem Header="Distro">
+                <controls:DistroInstaller/>
+            </TabItem>
+            <TabItem Header="Packages"/>
+        </TabControl>
+        
         <Border Grid.Row="0" BorderThickness="0,0,0,1">
             <Border.BorderBrush>
                 <SolidColorBrush Color="#ccd4dd"/>
@@ -37,8 +48,7 @@
                 </Grid.ColumnDefinitions>
 
                 <WrapPanel Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <ComboBox ItemsSource="{Binding Dists}" SelectedValue="{Binding SelectedDistro}" Width="180" Margin="1,0,1,0"/>
-                    <Button Content="Install..." Margin="1,0,1,0" Command="{Binding InstallDistroCommand}"/>
+                    <ComboBox ItemsSource="{Binding Dists}" SelectedValue="{Binding SelectedDistro}" Width="200"/>
                 </WrapPanel>
 
                 <Button Grid.Column="1" Width="42" Height="42" Command="{Binding RunCommand}">
@@ -57,33 +67,5 @@
                 </Button>
             </Grid>
         </Border>
-
-        <Grid Grid.Row="1">
-            <Grid.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF05050F" Offset="0"/>
-                    <GradientStop Color="#FF1C1C32" Offset="1"/>
-                </LinearGradientBrush>
-            </Grid.Background>
-            
-            <Image Width="400" Height="400" Margin="-300,0,0,-200"
-                   RenderOptions.BitmapScalingMode="NearestNeighbor"
-                   Source="pack://application:,,,/WALauncher;component/Graphics/armageddon.png"/>
-
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="74"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="74"/>
-                </Grid.ColumnDefinitions>
-
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="16"/>
-                </Grid.RowDefinitions>
-
-                <ContentControl Content="{Binding ActiveItem}"/>
-            </Grid>
-        </Grid>
     </Grid>
 </Window>
