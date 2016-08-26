@@ -26,7 +26,9 @@
             <TabItem Header="Distro">
                 <controls:DistroInstaller/>
             </TabItem>
-            <TabItem Header="Packages"/>
+            <TabItem Header="Packages">
+                <controls:PackageInstaller/>
+            </TabItem>
         </TabControl>
         
         <Border Grid.Row="0" BorderThickness="0,0,0,1">
@@ -48,7 +50,7 @@
                 </Grid.ColumnDefinitions>
 
                 <WrapPanel Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <ComboBox ItemsSource="{Binding Dists}" SelectedValue="{Binding SelectedDistro}" Width="200"/>
+                    <ComboBox Name="distroBox" ItemsSource="{Binding Dists}" SelectedValue="{Binding SelectedDistro}" Width="200"/>
                 </WrapPanel>
 
                 <Button Grid.Column="1" Width="42" Height="42" Command="{Binding RunCommand}">
@@ -62,7 +64,7 @@
                     <Button.Content>
                         <Image Width="32" Height="32" RenderOptions.BitmapScalingMode="NearestNeighbor"
                                VerticalAlignment="Center" HorizontalAlignment="Center"
-                               Source="pack://application:,,,/WALauncher;component/Graphics/run.png"/>
+                               Source="pack://application:,,,/WALauncher;component/Graphics/Icons/run.png"/>
                     </Button.Content>
                 </Button>
             </Grid>

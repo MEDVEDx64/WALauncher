@@ -25,5 +25,10 @@ namespace WALauncher.ViewModels
                 return dists;
             }
         }
+
+        public void NotifyDistroListChanged()
+        {
+            RaisePropertyChanged(nameof(Dists));
+        }
     }
 }
