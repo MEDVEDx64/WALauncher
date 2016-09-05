@@ -35,6 +35,8 @@ namespace WALauncher.Wapkg
 
         public event EventHandler<ServiceMessageEventArgs> TextAccepted;
 
+        public string WorkingDirectory { get; private set; }
+
         public InteractionService()
         {
             process = CreateServiceProcess();
@@ -135,6 +137,11 @@ namespace WALauncher.Wapkg
 
                     TextAccepted?.Invoke(this, new ServiceMessageEventArgs(packet, text));
                 }
+
+                else if (cmd == "wd")
+                {
+                    WorkingDirectory = lines[1];
+                }
             }
 
             udp.Close();
@@ -204,6 +211,11 @@ namespace WALauncher.Wapkg
         public void RequestUpdate()
         {
             SendWqRequest("update-index");
+        }
+
+        public void RequestWorkingDirectory()
+        {
+            SendWqRequest("wd");
         }
 
         public void Shutdown()

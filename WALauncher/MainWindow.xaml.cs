@@ -16,9 +16,11 @@ namespace WALauncher
         void OnLoaded(object sender, EventArgs e)
         {
             var wapkg = InteractionService.Get();
+
             wapkg.Subscribe();
             wapkg.RequestUpdate();
             wapkg.RequestDistributions();
+            wapkg.RequestWorkingDirectory();
         }
 
         void OnClosed(object sender, EventArgs e)
