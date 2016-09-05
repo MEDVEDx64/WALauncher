@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using WALauncher.Utils;
 using WALauncher.Wapkg;
@@ -31,6 +33,28 @@ namespace WALauncher.ViewModels
 
         void Run()
         {
+            if(SelectedDistro == null || SelectedDistro.Length == 0)
+            {
+                MessageBox.Show("Please select a distro.", "WALauncher", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            if(wapkg.WorkingDirectory == null)
+            {
+                MessageBox.Show("I don't know how to access the selected distro. Try restarting WALauncher.",
+                    "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            var p = new ProcessStartInfo()
+            {
+                FileName = Path.Combine(wapkg.WorkingDirectory, SelectedDistro, "WA.exe")
+            };
+
+            new Process()
+            {
+                StartInfo = p
+            }.Start();
         }
 
         private void OnDistsChanged(object sender, ServiceMessageEventArgs e)
