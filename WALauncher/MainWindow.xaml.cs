@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows;
-using WALauncher.ViewModels;
+using WALauncher.Wapkg;
 
 namespace WALauncher
 {
@@ -9,17 +9,21 @@ namespace WALauncher
         public MainWindow()
         {
             InitializeComponent();
-            distroBox.GotFocus += OnDistroBoxGotFocus;
-            new Wapkg().Init();
+            Loaded += OnLoaded;
+            Closed += OnClosed;
         }
 
-        void OnDistroBoxGotFocus(object sender, EventArgs e)
+        void OnLoaded(object sender, EventArgs e)
         {
-            var vm = DataContext as MainWindowViewModel;
-            if(vm != null)
-            {
-                vm.NotifyDistroListChanged();
-            }
+            var wapkg = InteractionService.Get();
+            wapkg.Subscribe();
+            wapkg.RequestUpdate();
+            wapkg.RequestDistributions();
+        }
+
+        void OnClosed(object sender, EventArgs e)
+        {
+            InteractionService.Get().Shutdown();
         }
     }
 }

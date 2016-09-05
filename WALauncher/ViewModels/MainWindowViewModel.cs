@@ -1,29 +1,51 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Windows;
 using WALauncher.Utils;
+using WALauncher.Wapkg;
 
 namespace WALauncher.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        InteractionService wapkg = null;
+
         public MainWindowViewModel()
         {
+            wapkg = InteractionService.Get();
+
+            Dists = new ObservableCollection<string>();
+            wapkg.DistributionsChanged += OnDistsChanged;
+
+            RunCommand = new DelegateCommand(Run);
         }
 
-        ObservableCollection<string> dists = new ObservableCollection<string>();
+        public ObservableCollection<string> Dists { get; }
+        public DelegateCommand RunCommand { get; }
 
         public string SelectedDistro { get; set; }
 
-        public ObservableCollection<string> Dists
+        void Run()
         {
-            get
+        }
+
+        private void OnDistsChanged(object sender, ServiceMessageEventArgs e)
+        {
+            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
-                dists.Clear();
-                foreach(var d in new Wapkg().GetDists())
+                var selected = SelectedDistro;
+                Dists.Clear();
+                foreach (var d in e.Distributions)
                 {
-                    dists.Add(d);
+                    Dists.Add(d);
                 }
-                return dists;
-            }
+
+                if (Dists.Contains(selected))
+                {
+                    SelectedDistro = selected;
+                    RaisePropertyChanged(nameof(SelectedDistro));
+                }
+            }));
         }
 
         public void NotifyDistroListChanged()

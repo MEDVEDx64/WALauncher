@@ -71,7 +71,8 @@
     <Compile Include="ViewModels\PackageInstallerViewModel.cs" />
     <Compile Include="ViewModels\WapkgObjects\Distribution.cs" />
     <Compile Include="ViewModels\WapkgObjects\Package.cs" />
-    <Compile Include="Wapkg.cs" />
+    <Compile Include="Wapkg\InteractionService.cs" />
+    <Compile Include="Wapkg\ServiceMessageEventArgs.cs" />
     <Page Include="Controls\DistroInstaller.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -135,7 +136,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy $(SolutionDir)wapkg-tools\* $(TargetDir)</PostBuildEvent>
+    <PostBuildEvent>copy $(SolutionDir)wqdaemon.exe $(TargetDir)</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
