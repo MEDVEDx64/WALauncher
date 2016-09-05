@@ -14,8 +14,11 @@ namespace WALauncher.ViewModels
         {
             wapkg = InteractionService.Get();
 
+            RecentMessage = "Ready";
+
             Dists = new ObservableCollection<string>();
             wapkg.DistributionsChanged += OnDistsChanged;
+            wapkg.TextAccepted += OnTextAccepted;
 
             RunCommand = new DelegateCommand(Run);
         }
@@ -24,6 +27,7 @@ namespace WALauncher.ViewModels
         public DelegateCommand RunCommand { get; }
 
         public string SelectedDistro { get; set; }
+        public string RecentMessage { get; set; }
 
         void Run()
         {
@@ -46,6 +50,12 @@ namespace WALauncher.ViewModels
                     RaisePropertyChanged(nameof(SelectedDistro));
                 }
             }));
+        }
+
+        private void OnTextAccepted(object sender, ServiceMessageEventArgs e)
+        {
+            RecentMessage = e.Text;
+            RaisePropertyChanged(nameof(RecentMessage));
         }
 
         public void NotifyDistroListChanged()
