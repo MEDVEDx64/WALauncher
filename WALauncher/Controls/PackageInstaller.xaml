@@ -28,20 +28,26 @@
 
                 <HierarchicalDataTemplate DataType="{x:Type wapkg:InstalledPackage}">
                     <WrapPanel Height="18">
-                        <Label Margin="1" Padding="2" FontFamily="Courier" FontSize="10" Content="{Binding Name}"/>
+                        <Label Margin="1" Padding="2" FontSize="10" Content="{Binding Name}"/>
                     </WrapPanel>
                 </HierarchicalDataTemplate>
 
                 <HierarchicalDataTemplate DataType="{x:Type wapkg:PackageInstallerItem}" ItemsSource="{Binding AvailableItems}">
-                    <Label Margin="0" Content="Add package...">
+                    <Label Height="18" Margin="0" Padding="2" FontSize="10" Content="Add package...">
                         <Label.Foreground>
-                            <SolidColorBrush Color="#595"/>
+                            <SolidColorBrush Color="#080"/>
                         </Label.Foreground>
                     </Label>
                 </HierarchicalDataTemplate>
 
                 <HierarchicalDataTemplate DataType="{x:Type wapkg:AvailablePackage}">
-                    <Label Margin="0" Content="{Binding Name}"/>
+                    <WrapPanel Height="18">
+                        <Label Margin="0" Padding="2" FontSize="10" Content="{Binding Name}">
+                            <Label.Foreground>
+                                <SolidColorBrush Color="#888"/>
+                            </Label.Foreground>
+                        </Label>
+                    </WrapPanel>
                 </HierarchicalDataTemplate>
             </TreeView.Resources>
         </TreeView>
