@@ -10,15 +10,15 @@ namespace WALauncher.ViewModels.WapkgObjects
     public class PackageInstallerItem : ViewModelBase
     {
         InteractionService wapkg = InteractionService.Get();
-        IReadOnlyList<Tuple<string, uint?>> packages = null;
+        string targetDistro = null;
 
         public ObservableCollection<object> AvailableItems { get; }
+        public IReadOnlyList<Tuple<string, uint?>> InstalledPackages { get; set; }
 
-        public PackageInstallerItem(IReadOnlyList<Tuple<string, uint?>> packages)
+        public PackageInstallerItem(string targetDistro)
         {
-            this.packages = packages;
+            this.targetDistro = targetDistro;
             AvailableItems = new ObservableCollection<object>();
-
             wapkg.AvailablePackagesAccepted += OnAvailablePackagesAccepted;
         }
 
@@ -29,10 +29,10 @@ namespace WALauncher.ViewModels.WapkgObjects
                 AvailableItems.Clear();
                 foreach (var pkg in e.Packages)
                 {
-                    if(packages != null)
+                    if(InstalledPackages != null)
                     {
                         bool flag = false;
-                        foreach(var installed in packages)
+                        foreach(var installed in InstalledPackages)
                         {
                             if(pkg.Item1 == installed.Item1 && pkg.Item2 <= installed.Item2)
                             {
@@ -44,15 +44,13 @@ namespace WALauncher.ViewModels.WapkgObjects
                         if (flag) continue;
                     }
 
-                    AvailableItems.Add(new AvailablePackage()
+                    AvailableItems.Add(new AvailablePackage(targetDistro)
                     {
                         Name = pkg.Item1,
-                        Revision = pkg.Item2 == null ? "virtual" : pkg.Item2.ToString()
+                        Revision = pkg.Item2 == null ? "virtual" : "r" + pkg.Item2.ToString()
                     });
                 }
             }));
-
-            RaisePropertyChanged(nameof(AvailableItems));
         }
     }
 }

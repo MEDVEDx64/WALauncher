@@ -17,6 +17,11 @@
     <Grid>
         <TreeView BorderThickness="0" ItemsSource="{Binding Items}">
             <TreeView.Resources>
+                <LinearGradientBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" EndPoint="0,1" StartPoint="0,0">
+                    <GradientStop Color="#eef" Offset="0"/>
+                    <GradientStop Color="#def" Offset="1"/>
+                </LinearGradientBrush>
+
                 <HierarchicalDataTemplate DataType="{x:Type wapkg:Distribution}" ItemsSource="{Binding Packages}">
                     <WrapPanel>
                         <Image Width="16" Height="16" RenderOptions.BitmapScalingMode="NearestNeighbor"
@@ -27,13 +32,14 @@
                 </HierarchicalDataTemplate>
 
                 <HierarchicalDataTemplate DataType="{x:Type wapkg:InstalledPackage}">
-                    <WrapPanel Height="18">
-                        <Label Margin="1" Padding="2" FontSize="10" Content="{Binding Name}"/>
+                    <WrapPanel Height="20">
+                        <Label Margin="1" Padding="1" FontSize="12" Content="{Binding Name}"/>
+                        <Label Margin="1" Padding="1" FontSize="12" Foreground="#aa5" Content="{Binding Revision}"/>
                     </WrapPanel>
                 </HierarchicalDataTemplate>
 
                 <HierarchicalDataTemplate DataType="{x:Type wapkg:PackageInstallerItem}" ItemsSource="{Binding AvailableItems}">
-                    <Label Height="18" Margin="0" Padding="2" FontSize="10" Content="Add package...">
+                    <Label Height="20" Margin="1" Padding="2" FontSize="12" Content="Add package...">
                         <Label.Foreground>
                             <SolidColorBrush Color="#080"/>
                         </Label.Foreground>
@@ -41,12 +47,10 @@
                 </HierarchicalDataTemplate>
 
                 <HierarchicalDataTemplate DataType="{x:Type wapkg:AvailablePackage}">
-                    <WrapPanel Height="18">
-                        <Label Margin="0" Padding="2" FontSize="10" Content="{Binding Name}">
-                            <Label.Foreground>
-                                <SolidColorBrush Color="#888"/>
-                            </Label.Foreground>
-                        </Label>
+                    <WrapPanel Height="20">
+                        <Button Margin="1" FontSize="10" Command="{Binding InstallCommand}">Install</Button>
+                        <Label Margin="1" Padding="1" FontSize="12" Foreground="#888" Content="{Binding Name}"/>
+                        <Label Margin="1" Padding="1" FontSize="12" Foreground="#aa5" Content="{Binding Revision}"/>
                     </WrapPanel>
                 </HierarchicalDataTemplate>
             </TreeView.Resources>

@@ -35,31 +35,44 @@ namespace WALauncher.ViewModels
                     });
                     wapkg.RequestPackages(d);
                 }
-
-                wapkg.RequestAvailablePackages();
             }));
         }
 
         void OnPackagesChanged(object sender, ServiceMessageEventArgs e)
         {
-            foreach(var i in Items)
+            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
-                if(i.Name == e.RelatedDistribution)
+                foreach (var i in Items)
                 {
-                    i.Packages.Clear();
-                    foreach(var pkg in e.Packages)
+                    if (i.Name == e.RelatedDistribution)
                     {
-                        i.Packages.Add(new InstalledPackage()
+                        int count = i.Packages.Count - 1;
+                        for (int x = 0; x < count; x++)
                         {
-                            Name = pkg.Item1,
-                            Revision = pkg.Item2.ToString()
-                        });
-                    }
+                            i.Packages.RemoveAt(0);
+                        }
 
-                    i.Packages.Add(new PackageInstallerItem(e.Packages));
-                    break;
+                        if (i.Packages.Count == 0)
+                        {
+                            i.Packages.Add(new PackageInstallerItem(e.RelatedDistribution));
+                        }
+
+                        foreach (var pkg in e.Packages)
+                        {
+                            i.Packages.Add(new InstalledPackage()
+                            {
+                                Name = pkg.Item1,
+                                Revision = "r" + pkg.Item2.ToString()
+                            });
+                        }
+
+                        ((PackageInstallerItem)i.Packages[0]).InstalledPackages = e.Packages;
+                        i.Packages.Move(0, i.Packages.Count - 1);
+                        wapkg.RequestAvailablePackages();
+                        break;
+                    }
                 }
-            }
+            }));
         }
     }
 }
