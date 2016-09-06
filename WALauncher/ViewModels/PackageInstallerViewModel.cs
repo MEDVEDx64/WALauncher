@@ -17,7 +17,6 @@ namespace WALauncher.ViewModels
 
             wapkg.DistributionsChanged += OnDistributionsChanged;
             wapkg.PackagesChanged += OnPackagesChanged;
-            wapkg.AvailablePackagesAccepted += OnAvailablePackagesAccepted;
         }
 
         public ObservableCollection<Distribution> Items { get; }
@@ -57,26 +56,10 @@ namespace WALauncher.ViewModels
                         });
                     }
 
-                    i.Packages.Add(new PackageInstallerItem());
+                    i.Packages.Add(new PackageInstallerItem(e.Packages));
                     break;
                 }
             }
-        }
-
-        void OnAvailablePackagesAccepted(object sender, ServiceMessageEventArgs e)
-        {
-            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-            {
-                PackageInstallerItem.AvailableItems.Clear();
-                foreach (var pkg in e.Packages)
-                {
-                    PackageInstallerItem.AvailableItems.Add(new AvailablePackage()
-                    {
-                        Name = pkg.Item1,
-                        Revision = pkg.Item2 == null ? "virtual" : pkg.Item2.ToString()
-                    });
-                }
-            }));
         }
     }
 }
