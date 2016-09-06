@@ -21,6 +21,7 @@ namespace WALauncher.ViewModels
             Dists = new ObservableCollection<string>();
             wapkg.DistributionsChanged += OnDistsChanged;
             wapkg.TextAccepted += OnTextAccepted;
+            wapkg.IndexChanged += OnIndexChanged;
 
             RunCommand = new DelegateCommand(Run);
         }
@@ -82,9 +83,10 @@ namespace WALauncher.ViewModels
             RaisePropertyChanged(nameof(RecentMessage));
         }
 
-        public void NotifyDistroListChanged()
+        private void OnIndexChanged(object sender, ServiceMessageEventArgs e)
         {
-            RaisePropertyChanged(nameof(Dists));
+            wapkg.RequestAvailableDistributions();
+            wapkg.RequestAvailablePackages();
         }
     }
 }

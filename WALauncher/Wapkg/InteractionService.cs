@@ -34,6 +34,7 @@ namespace WALauncher.Wapkg
         public event EventHandler<ServiceMessageEventArgs> AvailableDistributionsAccepted;
 
         public event EventHandler<ServiceMessageEventArgs> TextAccepted;
+        public event EventHandler<ServiceMessageEventArgs> IndexChanged;
 
         public string WorkingDirectory { get; private set; }
 
@@ -78,7 +79,7 @@ namespace WALauncher.Wapkg
                 var lines = packet.Split('\n');
                 var cmd = lines[0].Split('!')[1];
 
-                if (cmd == "packages-changes")
+                if (cmd == "packages-changed")
                 {
                     var dist = lines[1].Split('/')[1];
                     var pkgs = new List<Tuple<string, uint?>>();
@@ -141,6 +142,11 @@ namespace WALauncher.Wapkg
                 else if (cmd == "wd")
                 {
                     WorkingDirectory = lines[1];
+                }
+
+                else if (cmd == "index-changed")
+                {
+                    IndexChanged?.Invoke(this, new ServiceMessageEventArgs(packet));
                 }
             }
 

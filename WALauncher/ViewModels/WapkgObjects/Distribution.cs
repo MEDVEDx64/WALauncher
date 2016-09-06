@@ -7,10 +7,10 @@ namespace WALauncher.ViewModels.WapkgObjects
     {
         public Distribution()
         {
-            Packages = new ObservableCollection<Package>();
+            Packages = new ObservableCollection<object>();
         }
 
         public string Name { get; set; }
-        public ObservableCollection<Package> Packages { get; private set; }
+        public ObservableCollection<object> Packages { get; private set; }
     }
 }

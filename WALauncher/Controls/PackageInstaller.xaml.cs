@@ -1,6 +1,4 @@
-﻿using System;
-using System.Windows.Controls;
-using WALauncher.ViewModels;
+﻿using System.Windows.Controls;
 
 namespace WALauncher.Controls
 {
@@ -9,16 +7,6 @@ namespace WALauncher.Controls
         public PackageInstaller()
         {
             InitializeComponent();
-            Loaded += OnLoaded;
-        }
-
-        void OnLoaded(object sender, EventArgs e)
-        {
-            var vm = DataContext as PackageInstallerViewModel;
-            if(vm != null)
-            {
-                vm.NotifyItemsChanged();
-            }
         }
     }
 }

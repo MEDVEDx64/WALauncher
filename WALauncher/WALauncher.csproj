@@ -69,8 +69,11 @@
     <Compile Include="Utils\ViewModelBase.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\PackageInstallerViewModel.cs" />
+    <Compile Include="ViewModels\WapkgObjects\AvailablePackage.cs" />
     <Compile Include="ViewModels\WapkgObjects\Distribution.cs" />
+    <Compile Include="ViewModels\WapkgObjects\InstalledPackage.cs" />
     <Compile Include="ViewModels\WapkgObjects\Package.cs" />
+    <Compile Include="ViewModels\WapkgObjects\PackageInstallerItem.cs" />
     <Compile Include="Wapkg\InteractionService.cs" />
     <Compile Include="Wapkg\ServiceMessageEventArgs.cs" />
     <Page Include="Controls\DistroInstaller.xaml">
