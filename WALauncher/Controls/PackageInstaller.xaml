@@ -15,7 +15,7 @@
     </UserControl.DataContext>
     
     <Grid>
-        <TreeView BorderThickness="0" ItemsSource="{Binding Items}">
+        <TreeView BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding Items}">
             <TreeView.Resources>
                 <LinearGradientBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#eef" Offset="0"/>
@@ -48,7 +48,7 @@
 
                 <HierarchicalDataTemplate DataType="{x:Type wapkg:AvailablePackage}">
                     <WrapPanel Height="20">
-                        <Button Margin="1" FontSize="10" Command="{Binding InstallCommand}">Install</Button>
+                        <Button Margin="1" FontSize="10" IsEnabled="{Binding ButtonEnabled}" Command="{Binding InstallCommand}">Install</Button>
                         <Label Margin="1" Padding="1" FontSize="12" Foreground="#888" Content="{Binding Name}"/>
                         <Label Margin="1" Padding="1" FontSize="12" Foreground="#aa5" Content="{Binding Revision}"/>
                     </WrapPanel>
