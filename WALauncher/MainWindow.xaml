@@ -58,7 +58,7 @@
                 <WrapPanel Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <ComboBox Name="distroBox" Margin="1,0,1,0" ItemsSource="{Binding Dists}" SelectedValue="{Binding SelectedDistro}" Width="200"/>
                     <Button Margin="1,0,1,0" ToolTip="Open in File Explorer" Command="{Binding OpenExplorerCommand}">
-                        <Image Width="17" Height="17" RenderOptions.BitmapScalingMode="NearestNeighbor"
+                        <Image Width="16" Height="16" Margin="0.5,0.5,0,0" RenderOptions.BitmapScalingMode="NearestNeighbor"
                                Source="pack://application:,,,/WALauncher;component/Graphics/Icons/open.png"/>
                     </Button>
                 </WrapPanel>
@@ -72,7 +72,7 @@
                     </Button.Background>
 
                     <Button.Content>
-                        <Image Width="32" Height="32" RenderOptions.BitmapScalingMode="NearestNeighbor"
+                        <Image Width="32" Height="32" Margin="0.5,0.5,0,0" RenderOptions.BitmapScalingMode="NearestNeighbor"
                                VerticalAlignment="Center" HorizontalAlignment="Center"
                                Source="pack://application:,,,/WALauncher;component/Graphics/Icons/run.png"/>
                     </Button.Content>

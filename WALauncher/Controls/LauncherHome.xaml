@@ -15,7 +15,6 @@
         </Grid.Background>
 
         <Image Width="255" Height="205"
-               RenderOptions.BitmapScalingMode="NearestNeighbor"
                VerticalAlignment="Bottom" HorizontalAlignment="Left"
                Source="pack://application:,,,/WALauncher;component/Graphics/armageddon.png"/>
     </Grid>

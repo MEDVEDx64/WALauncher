@@ -31,7 +31,7 @@
                 </Border.Background>
             </Border>
 
-            <deco:LineField Color="#2000"/>
+            <deco:LineField Color="#3000"/>
 
             <Border BorderThickness="0">
                 <Border.Background>
@@ -51,8 +51,7 @@
                 </Border.Background>
             </Border>
 
-            <Image Width="64" Height="64" Margin="0,16,0,0"
-                   RenderOptions.BitmapScalingMode="NearestNeighbor" VerticalAlignment="Top"
+            <Image Width="64" Height="64" Margin="0,16,0,0" VerticalAlignment="Top"
                    Source="pack://application:,,,/WALauncher;component/Graphics/package.png"/>
         </Grid>
 
