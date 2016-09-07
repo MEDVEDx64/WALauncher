@@ -56,6 +56,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\Decorations\LineField.cs" />
     <Compile Include="Controls\DistroInstaller.xaml.cs">
       <DependentUpon>DistroInstaller.xaml</DependentUpon>
     </Compile>
@@ -137,6 +138,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Graphics\armageddon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Graphics\package.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

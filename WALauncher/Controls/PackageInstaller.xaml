@@ -7,6 +7,7 @@
              xmlns:local="clr-namespace:WALauncher.Controls"
              xmlns:vm="clr-namespace:WALauncher.ViewModels"
              xmlns:wapkg="clr-namespace:WALauncher.ViewModels.WapkgObjects"
+             xmlns:deco="clr-namespace:WALauncher.Controls.Decorations"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
@@ -15,7 +16,48 @@
     </UserControl.DataContext>
     
     <Grid>
-        <TreeView BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding Items}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" RenderOptions.EdgeMode="Aliased">
+            <Border BorderThickness="0,0,1,0" BorderBrush="Black">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0,0.85" StartPoint="0,0">
+                        <GradientStop Color="#FF0C152E" Offset="0"/>
+                        <GradientStop Color="#FF3C1B0C" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+
+            <deco:LineField Color="#2000"/>
+
+            <Border BorderThickness="0">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <LinearGradientBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                <RotateTransform Angle="-90" CenterY="0.5" CenterX="0.5"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </LinearGradientBrush.RelativeTransform>
+                        <GradientStop Color="#0000" Offset="0"/>
+                        <GradientStop Color="#0000" Offset="0.25"/>
+                        <GradientStop Color="#5000" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+
+            <Image Width="64" Height="64" Margin="0,16,0,0"
+                   RenderOptions.BitmapScalingMode="NearestNeighbor" VerticalAlignment="Top"
+                   Source="pack://application:,,,/WALauncher;component/Graphics/package.png"/>
+        </Grid>
+
+        <TreeView Grid.Column="1" BorderThickness="0" ItemsSource="{Binding Items}"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible">
             <TreeView.Resources>
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
 
