@@ -59,7 +59,7 @@ namespace WALauncher.ViewModels
 
                         foreach (var pkg in e.Packages)
                         {
-                            i.Packages.Add(new InstalledPackage()
+                            i.Packages.Add(new InstalledPackage(e.RelatedDistribution)
                             {
                                 Name = pkg.Item1,
                                 Revision = "r" + pkg.Item2.ToString()
