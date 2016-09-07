@@ -50,6 +50,8 @@ namespace WALauncher.ViewModels.WapkgObjects
                         Revision = pkg.Item2 == null ? "virtual" : "r" + pkg.Item2.ToString()
                     });
                 }
+
+                AvailableItems.Add(new PackageFileInstallerItem(targetDistro));
             }));
         }
     }

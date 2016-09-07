@@ -164,7 +164,7 @@ namespace WALauncher.Wapkg
             string msg = "wq/0.1";
             foreach(var a in args)
             {
-                msg += ":" + a;
+                msg += ";" + a;
             }
 
             msg += "\n";

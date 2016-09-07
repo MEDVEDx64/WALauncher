@@ -73,6 +73,7 @@
     <Compile Include="ViewModels\WapkgObjects\Distribution.cs" />
     <Compile Include="ViewModels\WapkgObjects\InstalledPackage.cs" />
     <Compile Include="ViewModels\WapkgObjects\Package.cs" />
+    <Compile Include="ViewModels\WapkgObjects\PackageFileInstallerItem.cs" />
     <Compile Include="ViewModels\WapkgObjects\PackageInstallerItem.cs" />
     <Compile Include="Wapkg\InteractionService.cs" />
     <Compile Include="Wapkg\ServiceMessageEventArgs.cs" />
