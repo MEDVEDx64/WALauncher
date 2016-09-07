@@ -56,10 +56,14 @@
                 </Grid.ColumnDefinitions>
 
                 <WrapPanel Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <ComboBox Name="distroBox" ItemsSource="{Binding Dists}" SelectedValue="{Binding SelectedDistro}" Width="200"/>
+                    <ComboBox Name="distroBox" Margin="1,0,1,0" ItemsSource="{Binding Dists}" SelectedValue="{Binding SelectedDistro}" Width="200"/>
+                    <Button Margin="1,0,1,0" ToolTip="Open in File Explorer" Command="{Binding OpenExplorerCommand}">
+                        <Image Width="17" Height="17" RenderOptions.BitmapScalingMode="NearestNeighbor"
+                               Source="pack://application:,,,/WALauncher;component/Graphics/Icons/open.png"/>
+                    </Button>
                 </WrapPanel>
 
-                <Button Grid.Column="1" Width="42" Height="42" Command="{Binding RunCommand}">
+                <Button Grid.Column="1" Width="42" Height="42" ToolTip="Launch" Command="{Binding RunCommand}">
                     <Button.Background>
                         <RadialGradientBrush>
                             <GradientStop Color="#FFBBFFC7" Offset="0"/>

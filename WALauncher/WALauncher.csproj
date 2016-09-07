@@ -142,6 +142,9 @@
   <ItemGroup>
     <Resource Include="Graphics\package.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Graphics\Icons\open.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy $(SolutionDir)wqdaemon.exe $(TargetDir)</PostBuildEvent>
