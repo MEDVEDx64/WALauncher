@@ -16,8 +16,6 @@ namespace WALauncher.ViewModels
         {
             wapkg = InteractionService.Get();
 
-            RecentMessage = "Ready";
-
             Dists = new ObservableCollection<string>();
             wapkg.DistributionsChanged += OnDistsChanged;
             wapkg.TextAccepted += OnTextAccepted;

@@ -7,7 +7,7 @@
         xmlns:controls="clr-namespace:WALauncher.Controls"
         xmlns:vm="clr-namespace:WALauncher.ViewModels"
         mc:Ignorable="d"
-        Title="Worms Armageddon Launcher" Height="378" Width="448" ResizeMode="CanMinimize">
+        Title="Worms Armageddon Launcher" Height="374" Width="448" ResizeMode="CanMinimize">
 
     <Window.DataContext>
         <vm:MainWindowViewModel/>
@@ -17,19 +17,12 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="64"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="18"/>
+            <RowDefinition Height="14"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="2">
-            <Grid.Background>
-                <SolidColorBrush Color="White"/>
-            </Grid.Background>
-
-            <TextBlock Text="{Binding RecentMessage}">
-                <TextBlock.Foreground>
-                    <SolidColorBrush Color="#222"/>
-                </TextBlock.Foreground>
-            </TextBlock>
+        <Grid Grid.Row="2" Background="White">
+            <TextBox Foreground="#222" FontSize="10" Padding="0"
+                     BorderThickness="0" IsReadOnly="True" Text="{Binding RecentMessage}"/>
         </Grid>
 
         <TabControl Grid.Row="1" TabStripPlacement="Bottom" BorderThickness="0" Margin="-2,-2,-2,0">

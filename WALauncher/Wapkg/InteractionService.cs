@@ -136,7 +136,11 @@ namespace WALauncher.Wapkg
                         text += lines[i] + "\n";
                     }
 
-                    TextAccepted?.Invoke(this, new ServiceMessageEventArgs(packet, text));
+                    if (text.Length > 0)
+                    {
+                        text = text.Remove(text.Length - 1);
+                        TextAccepted?.Invoke(this, new ServiceMessageEventArgs(packet, text));
+                    }
                 }
 
                 else if (cmd == "wd")
