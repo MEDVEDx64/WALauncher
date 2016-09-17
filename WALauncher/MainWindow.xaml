@@ -30,7 +30,7 @@
                 <controls:LauncherHome/>
             </TabItem>
             <TabItem Header="Distro">
-                <controls:DistroInstaller/>
+                <controls:DistributionInstaller/>
             </TabItem>
             <TabItem Header="Packages">
                 <controls:PackageInstaller/>

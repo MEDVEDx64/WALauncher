@@ -2,9 +2,9 @@
 
 namespace WALauncher.Controls
 {
-    public partial class DistroInstaller : UserControl
+    public partial class DistributionInstaller : UserControl
     {
-        public DistroInstaller()
+        public DistributionInstaller()
         {
             InitializeComponent();
         }

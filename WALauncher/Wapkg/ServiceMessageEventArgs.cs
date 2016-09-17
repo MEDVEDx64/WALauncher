@@ -5,13 +5,17 @@ namespace WALauncher.Wapkg
 {
     public class ServiceMessageEventArgs : EventArgs
     {
-        public string RawMessage { get; private set; }
+        public string RawMessage { get; }
 
-        public string RelatedDistribution { get; private set; }
-        public IReadOnlyList<Tuple<string, uint?>> Packages { get; private set; }
-        public IReadOnlyList<string> Distributions { get; private set; }
+        public string RelatedDistribution { get; }
+        public IReadOnlyList<Tuple<string, uint?>> Packages { get; }
+        public IReadOnlyList<string> Distributions { get; }
 
-        public string Text { get; private set; }
+        public string ActionToken { get; }
+        public int ActionProgressCurrent { get; }
+        public int ActionProgressTotal { get; }
+
+        public string Text { get; }
 
         public ServiceMessageEventArgs(string raw)
         {
@@ -35,6 +39,13 @@ namespace WALauncher.Wapkg
         {
             RawMessage = raw;
             Distributions = dists;
+        }
+
+        public ServiceMessageEventArgs(string raw, string actionToken, int current, int total)
+        {
+            ActionToken = actionToken;
+            ActionProgressCurrent = current;
+            ActionProgressTotal = total;
         }
     }
 }

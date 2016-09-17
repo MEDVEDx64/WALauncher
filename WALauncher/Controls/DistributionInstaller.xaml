@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="WALauncher.Controls.DistributionInstaller"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WALauncher.Controls"
+             xmlns:vm="clr-namespace:WALauncher.ViewModels"
+             xmlns:wapkg="clr-namespace:WALauncher.ViewModels.WapkgObjects"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+
+    <UserControl.DataContext>
+        <vm:DistributionInstallerViewModel/>
+    </UserControl.DataContext>
+    
+    <Grid>
+        <ListView ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding Items}">
+            <ListView.Resources>
+                <DataTemplate DataType="{x:Type wapkg:AvailableDistribution}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="12"/>
+                        </Grid.RowDefinitions>
+
+                        <WrapPanel Grid.Row="0">
+                            <TextBox FontSize="18" Margin="1" BorderThickness="0" Width="360" Text="{Binding SuggestedName}"/>
+                            <Button Margin="1" IsEnabled="{Binding ButtonEnabled}" Command="{Binding InstallCommand}">Install</Button>
+                        </WrapPanel>
+
+                        <ProgressBar Margin="1" Grid.Row="1" Minimum="0" Maximum="{Binding TotalProgress}"
+                                     Value="{Binding CurrentProgress}" IsIndeterminate="{Binding Installing}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.Resources>
+        </ListView>
+    </Grid>
+</UserControl>

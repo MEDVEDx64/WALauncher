@@ -35,6 +35,8 @@ namespace WALauncher.Wapkg
 
         public event EventHandler<ServiceMessageEventArgs> TextAccepted;
         public event EventHandler<ServiceMessageEventArgs> IndexChanged;
+        public event EventHandler<ServiceMessageEventArgs> ActionProgressUpdated;
+        public event EventHandler<ServiceMessageEventArgs> ActionComplete;
 
         public string WorkingDirectory { get; private set; }
 
@@ -152,6 +154,16 @@ namespace WALauncher.Wapkg
                 {
                     IndexChanged?.Invoke(this, new ServiceMessageEventArgs(packet));
                 }
+
+                else if (cmd == "action-update")
+                {
+                    ActionProgressUpdated?.Invoke(this, new ServiceMessageEventArgs(packet, lines[1], Convert.ToInt32(lines[2]), Convert.ToInt32(lines[3])));
+                }
+
+                else if (cmd == "action-complete")
+                {
+                    ActionComplete?.Invoke(this, new ServiceMessageEventArgs(packet, lines[1], 0, 0));
+                }
             }
 
             udp.Close();
@@ -168,6 +180,7 @@ namespace WALauncher.Wapkg
             string msg = "wq/0.1";
             foreach(var a in args)
             {
+                if (a == null) continue;
                 msg += ";" + a;
             }
 
@@ -190,12 +203,12 @@ namespace WALauncher.Wapkg
             SendWqRequest("remove", distro, package);
         }
 
-        public void InstallDistribution(string distro, string name = null)
+        public void InstallDistribution(string distro, string name = null, string actionToken = null)
         {
             if (name == null)
-                SendWqRequest("dist-install", distro);
+                SendWqRequest("dist-install", distro, distro, actionToken);
             else
-                SendWqRequest("dist-install", distro, name);
+                SendWqRequest("dist-install", distro, name, actionToken);
         }
 
         public void RequestPackages(string distro)
@@ -231,7 +244,11 @@ namespace WALauncher.Wapkg
         public void Shutdown()
         {
             running = false;
-            process.Kill();
+            if (!process.HasExited)
+            {
+                process.Kill();
+            }
+
             service = null;
         }
     }
