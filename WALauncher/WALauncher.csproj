@@ -73,6 +73,7 @@
     <Compile Include="ViewModels\PackageInstallerViewModel.cs" />
     <Compile Include="ViewModels\WapkgObjects\AvailableDistribution.cs" />
     <Compile Include="ViewModels\WapkgObjects\AvailablePackage.cs" />
+    <Compile Include="ViewModels\WapkgObjects\DistribuionFileInstallerItem.cs" />
     <Compile Include="ViewModels\WapkgObjects\Distribution.cs" />
     <Compile Include="ViewModels\WapkgObjects\InstalledPackage.cs" />
     <Compile Include="ViewModels\WapkgObjects\Package.cs" />

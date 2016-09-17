@@ -28,8 +28,27 @@
                             <Button Margin="1" IsEnabled="{Binding ButtonEnabled}" Command="{Binding InstallCommand}">Install</Button>
                         </WrapPanel>
 
-                        <ProgressBar Margin="1" Grid.Row="1" Minimum="0" Maximum="{Binding TotalProgress}"
+                        <ProgressBar Grid.Row="1" Margin="1" Minimum="0" Maximum="{Binding TotalProgress}"
                                      Value="{Binding CurrentProgress}" IsIndeterminate="{Binding Installing}"/>
+                    </Grid>
+                </DataTemplate>
+
+                <DataTemplate DataType="{x:Type wapkg:DistribuionFileInstallerItem}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        
+                        <WrapPanel Grid.Row="0">
+                            <TextBlock FontSize="18" Margin="1" Foreground="#480" Text="Install from file"/>
+                            <Button Margin="4,1,1,1" Width="20" Command="{Binding OpenFileCommand}">...</Button>
+                        </WrapPanel>
+
+                        <WrapPanel Grid.Row="1">
+                            <TextBlock Margin="1" FontSize="11" Text="Suggested name:"/>
+                            <TextBox Margin="1" Width="150" FontSize="11" Text="{Binding SuggestedName}"/>
+                        </WrapPanel>
                     </Grid>
                 </DataTemplate>
             </ListView.Resources>

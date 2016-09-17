@@ -206,7 +206,7 @@ namespace WALauncher.Wapkg
         public void InstallDistribution(string distro, string name = null, string actionToken = null)
         {
             if (name == null)
-                SendWqRequest("dist-install", distro, distro, actionToken);
+                SendWqRequest("dist-install", distro);
             else
                 SendWqRequest("dist-install", distro, name, actionToken);
         }

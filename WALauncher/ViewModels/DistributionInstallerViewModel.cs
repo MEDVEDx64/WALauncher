@@ -11,11 +11,11 @@ namespace WALauncher.ViewModels
     {
         InteractionService wapkg = InteractionService.Get();
 
-        public ObservableCollection<AvailableDistribution> Items { get; }
+        public ObservableCollection<object> Items { get; }
 
         public DistributionInstallerViewModel()
         {
-            Items = new ObservableCollection<AvailableDistribution>();
+            Items = new ObservableCollection<object>();
             wapkg.AvailableDistributionsAccepted += OnAvailableDistributionsAccepted;
         }
 
@@ -28,6 +28,8 @@ namespace WALauncher.ViewModels
                 {
                     Items.Add(new AvailableDistribution(dist));
                 }
+
+                Items.Add(new DistribuionFileInstallerItem());
             }));
         }
     }
