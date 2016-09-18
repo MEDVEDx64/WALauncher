@@ -14,7 +14,7 @@
     </UserControl.DataContext>
     
     <Grid>
-        <ListView ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding Items}">
+        <ListView BorderThickness="0" Margin="-1,-1,-1,-1" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding Items}">
             <ListView.Resources>
                 <DataTemplate DataType="{x:Type wapkg:AvailableDistribution}">
                     <Grid>
