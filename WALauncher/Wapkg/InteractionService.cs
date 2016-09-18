@@ -27,6 +27,9 @@ namespace WALauncher.Wapkg
 
         private ushort lsnPort = 51123;
         private bool running = true;
+        private bool ready = false;
+
+        private Queue<string> delayedPackets = new Queue<string>(); // only required on daemon initialization stage
 
         public event EventHandler<ServiceMessageEventArgs> PackagesChanged;
         public event EventHandler<ServiceMessageEventArgs> DistributionsChanged;
@@ -43,11 +46,28 @@ namespace WALauncher.Wapkg
         public InteractionService()
         {
             process = CreateServiceProcess();
+            process.OutputDataReceived += OnProcessOutputDataReceived;
             process.Start();
+            process.BeginOutputReadLine();
+        }
 
-            udp = new UdpClient(lsnPort);
-            udp.Connect(IPAddress.Loopback, 16723);
-            new Thread(ServiceThread).Start();
+        private void OnProcessOutputDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            if(e.Data == "ready")
+            {
+                process.OutputDataReceived -= OnProcessOutputDataReceived;
+
+                udp = new UdpClient(lsnPort);
+                udp.Connect(IPAddress.Loopback, 16723);
+                new Thread(ServiceThread).Start();
+
+                ready = true;
+
+                while(delayedPackets.Count > 0)
+                {
+                    Send(delayedPackets.Dequeue());
+                }
+            }
         }
 
         private Process CreateServiceProcess()
@@ -56,6 +76,7 @@ namespace WALauncher.Wapkg
 
             i.CreateNoWindow = true;
             i.UseShellExecute = false;
+            i.RedirectStandardOutput = true;
             i.FileName = "wqdaemon.exe";
 
             var proc = new Process();
@@ -171,8 +192,15 @@ namespace WALauncher.Wapkg
 
         void Send(string msg)
         {
-            var bytes = Encoding.UTF8.GetBytes(msg);
-            udp.Send(bytes, bytes.Length);
+            if (ready)
+            {
+                var bytes = Encoding.UTF8.GetBytes(msg);
+                udp.Send(bytes, bytes.Length);
+            }
+            else
+            {
+                delayedPackets.Enqueue(msg);
+            }
         }
 
         void SendWqRequest(params string[] args)
@@ -244,6 +272,8 @@ namespace WALauncher.Wapkg
         public void Shutdown()
         {
             running = false;
+            ready = false;
+
             if (!process.HasExited)
             {
                 process.Kill();
