@@ -23,11 +23,13 @@ namespace WALauncher.ViewModels
 
             RunCommand = new DelegateCommand(Run);
             OpenExplorerCommand = new DelegateCommand(OpenExplorer);
+            RefreshCommand = new DelegateCommand(Refresh);
         }
 
         public ObservableCollection<string> Dists { get; }
         public DelegateCommand RunCommand { get; }
         public DelegateCommand OpenExplorerCommand { get; }
+        public DelegateCommand RefreshCommand { get; }
 
         public string SelectedDistro { get; set; }
         public string RecentMessage { get; set; }
@@ -61,6 +63,12 @@ namespace WALauncher.ViewModels
         void OpenExplorer()
         {
             Process.Start(Path.Combine(wapkg.WorkingDirectory, SelectedDistro ?? ""));
+        }
+
+        void Refresh()
+        {
+            wapkg.RequestDistributions();
+            wapkg.RequestUpdate();
         }
 
         private void OnDistsChanged(object sender, ServiceMessageEventArgs e)
