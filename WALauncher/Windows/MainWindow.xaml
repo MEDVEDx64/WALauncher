@@ -26,7 +26,7 @@
                      BorderThickness="0" IsReadOnly="True" Text="{Binding RecentMessage}"/>
         </Grid>
 
-        <TabControl Grid.Row="1" TabStripPlacement="Bottom" BorderThickness="0" Margin="-2,-2,-2,0">
+        <TabControl Grid.Row="1" TabStripPlacement="Bottom" BorderThickness="0,0,0,1" Margin="-2,-2,-2,0">
             <TabItem Header="Home">
                 <controls:LauncherHome/>
             </TabItem>
