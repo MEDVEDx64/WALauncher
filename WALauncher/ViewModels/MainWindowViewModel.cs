@@ -10,7 +10,10 @@ namespace WALauncher.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        static readonly string distroFile = "current_distro";
+
         InteractionService wapkg = null;
+        string selectedDistro = "";
 
         public MainWindowViewModel()
         {
@@ -24,6 +27,23 @@ namespace WALauncher.ViewModels
             RunCommand = new DelegateCommand(Run);
             OpenExplorerCommand = new DelegateCommand(OpenExplorer);
             RefreshCommand = new DelegateCommand(Refresh);
+
+            if (File.Exists(distroFile))
+            {
+                try
+                {
+                    using (var f = new StreamReader(new FileStream(distroFile, FileMode.Open)))
+                    {
+                        SelectedDistro = f.ReadLine();
+                    }
+
+                    RaisePropertyChanged(nameof(SelectedDistro));
+                }
+
+                catch
+                {
+                }
+            }
         }
 
         public ObservableCollection<string> Dists { get; }
@@ -31,14 +51,33 @@ namespace WALauncher.ViewModels
         public DelegateCommand OpenExplorerCommand { get; }
         public DelegateCommand RefreshCommand { get; }
 
-        public string SelectedDistro { get; set; }
+        public string SelectedDistro
+        {
+            get { return selectedDistro; }
+            set
+            {
+                selectedDistro = value;
+                try
+                {
+                    using (var f = new StreamWriter(new FileStream(distroFile, FileMode.Create)))
+                    {
+                        f.Write(value);
+                    }
+                }
+
+                catch
+                {
+                }
+            }
+        }
+
         public string RecentMessage { get; set; }
 
         void Run()
         {
             if(SelectedDistro == null || SelectedDistro.Length == 0)
             {
-                MessageBox.Show("Please select a distro.", "WALauncher", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Please select a distro first.", "WALauncher", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
