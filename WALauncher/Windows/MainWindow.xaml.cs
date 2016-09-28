@@ -2,7 +2,7 @@
 using System.Windows;
 using WALauncher.Wapkg;
 
-namespace WALauncher
+namespace WALauncher.Windows
 {
     public partial class MainWindow : Window
     {
