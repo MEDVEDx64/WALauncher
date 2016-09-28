@@ -51,6 +51,11 @@ namespace WALauncher.Wapkg
             process.BeginOutputReadLine();
         }
 
+        public Process ServiceProcess
+        {
+            get { return process; }
+        }
+
         private void OnProcessOutputDataReceived(object sender, DataReceivedEventArgs e)
         {
             if(e.Data == "ready")
