@@ -20,6 +20,23 @@ namespace WALauncher.ViewModels.WapkgObjects
 
         public DelegateCommand InstallCommand { get; }
 
+        public string InstallButtonText
+        {
+            get
+            {
+                if(actionToken != null && !Installing)
+                {
+                    int pr = CurrentProgress / (TotalProgress / 100);
+                    return pr + "%";
+                }
+
+                else
+                {
+                    return "Install";
+                }
+            }
+        }
+
         public AvailableDistribution(string name)
         {
             Name = name;
@@ -63,6 +80,8 @@ namespace WALauncher.ViewModels.WapkgObjects
                     Installing = true;
                     RaisePropertyChanged(nameof(Installing));
                 }
+
+                RaisePropertyChanged(nameof(InstallButtonText));
             }));
         }
 
@@ -79,6 +98,7 @@ namespace WALauncher.ViewModels.WapkgObjects
 
                 RaisePropertyChanged(nameof(CurrentProgress));
                 RaisePropertyChanged(nameof(TotalProgress));
+                RaisePropertyChanged(nameof(InstallButtonText));
                 RaisePropertyChanged(nameof(SuggestedName));
                 RaisePropertyChanged(nameof(ButtonEnabled));
                 RaisePropertyChanged(nameof(Installing));
