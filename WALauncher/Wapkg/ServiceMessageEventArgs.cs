@@ -10,6 +10,7 @@ namespace WALauncher.Wapkg
         public string RelatedDistribution { get; }
         public IReadOnlyList<Tuple<string, uint?>> Packages { get; }
         public IReadOnlyList<string> Distributions { get; }
+        public IReadOnlyList<string> Sources { get; }
 
         public string ActionToken { get; }
         public int ActionProgressCurrent { get; }
@@ -39,6 +40,13 @@ namespace WALauncher.Wapkg
         {
             RawMessage = raw;
             Distributions = dists;
+        }
+
+        public ServiceMessageEventArgs(string raw, IReadOnlyList<string> dists, IReadOnlyList<string> sources)
+        {
+            RawMessage = raw;
+            Distributions = dists;
+            Sources = sources;
         }
 
         public ServiceMessageEventArgs(string raw, string actionToken, int current, int total)

@@ -70,11 +70,16 @@
     <Compile Include="Controls\PackageInstaller.xaml.cs">
       <DependentUpon>PackageInstaller.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SourcesEditor.xaml.cs">
+      <DependentUpon>SourcesEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utils\DelegateCommand.cs" />
     <Compile Include="Utils\ViewModelBase.cs" />
     <Compile Include="ViewModels\DistributionInstallerViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\PackageInstallerViewModel.cs" />
+    <Compile Include="ViewModels\SourcesEditorViewModel.cs" />
+    <Compile Include="ViewModels\Sources\SourceDefinition.cs" />
     <Compile Include="ViewModels\WapkgObjects\AvailableDistribution.cs" />
     <Compile Include="ViewModels\WapkgObjects\AvailablePackage.cs" />
     <Compile Include="ViewModels\WapkgObjects\DistribuionFileInstallerItem.cs" />
@@ -97,6 +102,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\PackageInstaller.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SourcesEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

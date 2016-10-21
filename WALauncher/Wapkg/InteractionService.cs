@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
@@ -40,6 +41,7 @@ namespace WALauncher.Wapkg
         public event EventHandler<ServiceMessageEventArgs> IndexChanged;
         public event EventHandler<ServiceMessageEventArgs> ActionProgressUpdated;
         public event EventHandler<ServiceMessageEventArgs> ActionComplete;
+        public event EventHandler<ServiceMessageEventArgs> SourcesChanged;
 
         public string WorkingDirectory { get; private set; }
 
@@ -104,7 +106,15 @@ namespace WALauncher.Wapkg
 
                 var packet = Encoding.UTF8.GetString(udp.Receive(ref endpoint));
                 if (!packet.StartsWith("quack!")) continue;
-                var lines = packet.Split('\n');
+                var lines = new List<string>();
+                foreach(var x in packet.Split('\n'))
+                {
+                    if (x.Trim().Length > 0)
+                    {
+                        lines.Add(x);
+                    }
+                }
+
                 var cmd = lines[0].Split('!')[1];
 
                 if (cmd == "packages-changed")
@@ -112,9 +122,8 @@ namespace WALauncher.Wapkg
                     var dist = lines[1].Split('/')[1];
                     var pkgs = new List<Tuple<string, uint?>>();
                     
-                    for (int i = 2; i < lines.Length; i++)
+                    for (int i = 2; i < lines.Count; i++)
                     {
-                        if (lines[i].Trim().Length == 0) continue;
                         var s = lines[i].Split(':');
                         pkgs.Add(new Tuple<string, uint?>(s[0], Convert.ToUInt32(s[1])));
                     }
@@ -125,9 +134,8 @@ namespace WALauncher.Wapkg
                 else if (cmd == "packages-available")
                 {
                     var pkgs = new List<Tuple<string, uint?>>();
-                    for (int i = 1; i < lines.Length; i++)
+                    for (int i = 1; i < lines.Count; i++)
                     {
-                        if (lines[i].Trim().Length == 0) continue;
                         var s = lines[i].Split(':');
                         uint? rev = null;
                         if(s[1] != "virtual")
@@ -144,9 +152,8 @@ namespace WALauncher.Wapkg
                 else if (cmd.StartsWith("dists-"))
                 {
                     var dists = new List<string>();
-                    for (int i = 1; i < lines.Length; i++)
+                    for (int i = 1; i < lines.Count; i++)
                     {
-                        if (lines[i].Trim().Length == 0) continue;
                         dists.Add(lines[i]);
                     }
 
@@ -158,9 +165,8 @@ namespace WALauncher.Wapkg
                 else if (cmd == "text")
                 {
                     string text = "";
-                    for (int i = 1; i < lines.Length; i++)
+                    for (int i = 1; i < lines.Count; i++)
                     {
-                        if (lines[i].Trim().Length == 0) continue;
                         text += lines[i] + "\n";
                     }
 
@@ -189,6 +195,17 @@ namespace WALauncher.Wapkg
                 else if (cmd == "action-complete")
                 {
                     ActionComplete?.Invoke(this, new ServiceMessageEventArgs(packet, lines[1], 0, 0));
+                }
+
+                else if (cmd == "sources-changed")
+                {
+                    List<string> sources = new List<string>();
+                    for (int x = 1; x < lines.Count; x++)
+                    {
+                        sources.Add(lines[x]);
+                    }
+
+                    SourcesChanged?.Invoke(this, new ServiceMessageEventArgs(packet, null, sources));
                 }
             }
 
@@ -272,6 +289,22 @@ namespace WALauncher.Wapkg
         public void RequestWorkingDirectory()
         {
             SendWqRequest("wd");
+        }
+
+        public void RequestSources()
+        {
+            SendWqRequest("sources");
+        }
+
+        public void PushSources(IEnumerable sources)
+        {
+            var args = new List<string>() { "push-sources" };
+            foreach(var x in sources)
+            {
+                args.Add(x.ToString());
+            }
+
+            SendWqRequest(args.ToArray());
         }
 
         public void Shutdown()

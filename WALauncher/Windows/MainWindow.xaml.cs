@@ -21,6 +21,7 @@ namespace WALauncher.Windows
             wapkg.RequestUpdate();
             wapkg.RequestDistributions();
             wapkg.RequestWorkingDirectory();
+            wapkg.RequestSources();
         }
 
         void OnClosed(object sender, EventArgs e)

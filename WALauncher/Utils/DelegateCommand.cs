@@ -6,19 +6,15 @@ namespace WALauncher.Utils
     public class DelegateCommand : ICommand
     {
         Action action = null;
-        Action<object> pAction = null;
 
         public DelegateCommand(Action a)
         {
             action = a;
         }
 
-        public DelegateCommand(Action<object> a)
-        {
-            pAction = a;
-        }
-
+#pragma warning disable 67
         public event EventHandler CanExecuteChanged;
+#pragma warning restore 67
 
         public bool CanExecute(object parameter)
         {
@@ -27,13 +23,31 @@ namespace WALauncher.Utils
 
         public void Execute(object parameter)
         {
-            if(action == null)
-            {
-                pAction(parameter);
-                return;
-            }
-
             action();
+        }
+    }
+
+    public class DelegateCommand<T> : ICommand
+    {
+        Action<T> action = null;
+
+        public DelegateCommand(Action<T> a)
+        {
+            action = a;
+        }
+
+#pragma warning disable 67
+        public event EventHandler CanExecuteChanged;
+#pragma warning restore 67
+
+        public bool CanExecute(object parameter)
+        {
+            return true;
+        }
+
+        public void Execute(object parameter)
+        {
+            action((T)parameter);
         }
     }
 }

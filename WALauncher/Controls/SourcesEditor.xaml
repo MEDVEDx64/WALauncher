@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="WALauncher.Controls.SourcesEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WALauncher.Controls"
+             xmlns:vm="clr-namespace:WALauncher.ViewModels"
+             xmlns:sources="clr-namespace:WALauncher.ViewModels.Sources"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+
+    <UserControl.DataContext>
+        <vm:SourcesEditorViewModel/>
+    </UserControl.DataContext>
+    
+    <Grid Margin="-1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <ListView Grid.Row="0" BorderThickness="0,0,0,1" ItemsSource="{Binding Sources}">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FFEAEAF0" Offset="0"/>
+                                <GradientStop Color="White" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                    <Setter Property="BorderBrush" Value="#cce"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            
+            <ListView.Resources>
+                <DataTemplate DataType="{x:Type sources:SourceDefinition}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="22"/>
+                            <ColumnDefinition Width="22"/>
+                            <ColumnDefinition Width="358"/>
+                            <ColumnDefinition Width="22"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Column="0" Margin="1,0,1,0" Command="{Binding MoveUpCommand}"
+                                Content="&#8593;" ToolTip="Move up"  Background="#64f4"/>
+                        <Button Grid.Column="1" Margin="1,0,1,0" Command="{Binding MoveDownCommand}"
+                                Content="&#8595;" ToolTip="Move down" Background="#64f4"/>
+                        <TextBox Grid.Column="2" Margin="1,0,1,0" BorderBrush="Transparent" Background="Transparent"
+                                 IsReadOnly="True" Text="{Binding Link, Mode=OneWay}"/>
+                        <Button Grid.Column="3" Margin="1,0,1,0" Command="{Binding RemoveCommand}"
+                                Content="&#215;" ToolTip="Remove" Background="#6f44"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.Resources>
+        </ListView>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox Grid.Column="0" Name="linkTextBox" Margin="2,1,1,0"/>
+            <Button Grid.Column="1" Margin="1,1,2,0" Content="Add" Padding="12,1,12,1"
+                    Command="{Binding AddSourceCommand}" CommandParameter="{Binding Text, ElementName=linkTextBox}"/>
+        </Grid>
+    </Grid>
+</UserControl>

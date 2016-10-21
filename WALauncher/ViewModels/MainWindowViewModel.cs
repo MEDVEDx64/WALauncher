@@ -108,6 +108,7 @@ namespace WALauncher.ViewModels
         {
             wapkg.RequestDistributions();
             wapkg.RequestUpdate();
+            wapkg.RequestSources();
         }
 
         private void OnDistsChanged(object sender, ServiceMessageEventArgs e)
