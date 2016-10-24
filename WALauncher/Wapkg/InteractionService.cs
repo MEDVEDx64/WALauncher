@@ -5,7 +5,8 @@ using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading;
+using System.Threading.Tasks;
+using WALauncher.Utils;
 
 namespace WALauncher.Wapkg
 {
@@ -66,7 +67,10 @@ namespace WALauncher.Wapkg
 
                 udp = new UdpClient(lsnPort);
                 udp.Connect(IPAddress.Loopback, 16723);
-                new Thread(ServiceThread).Start();
+
+                var task = new Task(ServiceThread);
+                task.ContinueWith(ExceptionHandling.TaskCrash);
+                task.Start();
 
                 ready = true;
 

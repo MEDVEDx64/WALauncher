@@ -18,7 +18,7 @@
         <WrapPanel Grid.Row="0" Margin="8">
             <Image Name="iconImage" Width="32" Height="32" Margin="4"/>
             <TextBlock FontSize="16" Margin="4,0,4,0" VerticalAlignment="Center">
-                An unhandled exception has been detected.
+                WALauncher has crashed.
             </TextBlock>
         </WrapPanel>
 

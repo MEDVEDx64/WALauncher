@@ -74,6 +74,7 @@
       <DependentUpon>SourcesEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\DelegateCommand.cs" />
+    <Compile Include="Utils\ExceptionHandling.cs" />
     <Compile Include="Utils\ViewModelBase.cs" />
     <Compile Include="ViewModels\DistributionInstallerViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
