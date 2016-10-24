@@ -28,7 +28,12 @@ namespace WALauncher.ViewModels
                 Sources.Clear();
                 foreach (var src in e.Sources)
                 {
-                    Sources.Add(new SourceDefinition(src, Sources));
+                    Sources.Add(new SourceDefinition(src));
+                }
+
+                foreach(var sd in Sources)
+                {
+                    sd.ApplySources(Sources);
                 }
 
                 RaisePropertyChanged(nameof(Sources));
@@ -55,7 +60,9 @@ namespace WALauncher.ViewModels
                     }
                 }
 
-                Sources.Add(new SourceDefinition(uri, Sources));
+                var sd = new SourceDefinition(uri);
+                Sources.Add(sd);
+                sd.ApplySources(Sources);
                 wapkg.PushSources(Sources);
             }
 
