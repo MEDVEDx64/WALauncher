@@ -55,7 +55,11 @@
                    Source="pack://application:,,,/WALauncher;component/Graphics/package.png"/>
         </Grid>
 
-        <TreeView Grid.Column="1" BorderThickness="0" ItemsSource="{Binding Items}"
+        <TextBlock Grid.Column="1" FontSize="14" Foreground="Gray" VerticalAlignment="Center" HorizontalAlignment="Center">
+            No distributions installed.
+        </TextBlock>
+        
+        <TreeView Grid.Column="1" BorderThickness="0" ItemsSource="{Binding Items}" Visibility="{Binding TreeViewVisibility}"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible">
             <TreeView.Resources>
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>

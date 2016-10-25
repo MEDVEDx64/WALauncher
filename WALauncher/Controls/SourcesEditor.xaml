@@ -46,7 +46,7 @@
                         </Grid.ColumnDefinitions>
 
                         <Button Grid.Column="0" Margin="1,0,1,0" Command="{Binding MoveUpCommand}"
-                                Content="&#8593;" ToolTip="Move up"  Background="#64f4"/>
+                                Content="&#8593;" ToolTip="Move up" Background="#64f4"/>
                         <Button Grid.Column="1" Margin="1,0,1,0" Command="{Binding MoveDownCommand}"
                                 Content="&#8595;" ToolTip="Move down" Background="#64f4"/>
                         <TextBox Grid.Column="2" Margin="1,0,1,0" BorderBrush="Transparent" Background="Transparent"

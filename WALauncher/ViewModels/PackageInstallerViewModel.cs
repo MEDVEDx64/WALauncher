@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Windows;
 using WALauncher.Utils;
 using WALauncher.ViewModels.WapkgObjects;
@@ -14,12 +15,23 @@ namespace WALauncher.ViewModels
         public PackageInstallerViewModel()
         {
             Items = new ObservableCollection<Distribution>();
+            Items.CollectionChanged += OnItemsChanged;
 
             wapkg.DistributionsChanged += OnDistributionsChanged;
             wapkg.PackagesChanged += OnPackagesChanged;
         }
 
         public ObservableCollection<Distribution> Items { get; }
+
+        public Visibility TreeViewVisibility
+        {
+            get { return Items.Count == 0 ? Visibility.Hidden : Visibility.Visible; }
+        }
+
+        private void OnItemsChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            RaisePropertyChanged(nameof(TreeViewVisibility));
+        }
 
         void OnDistributionsChanged(object sender, ServiceMessageEventArgs e)
         {
