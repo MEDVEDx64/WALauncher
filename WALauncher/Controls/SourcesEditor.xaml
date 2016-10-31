@@ -19,7 +19,17 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <ListView Grid.Row="0" BorderThickness="0,0,0,1" ItemsSource="{Binding Sources}">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="24">
+            <TextBlock>
+                No sources were added.
+                <Hyperlink Command="{Binding AddSourceCommand}" CommandParameter="https://themassacre.org/worms/">
+                    Try adding one
+                </Hyperlink>
+            </TextBlock>
+        </StackPanel>
+        
+        <ListView Grid.Row="0" BorderThickness="0,0,0,1" ItemsSource="{Binding Sources}" Visibility="{Binding ListViewVisibility}"
+                  ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden">
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="Background">

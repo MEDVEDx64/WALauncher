@@ -14,6 +14,11 @@ namespace WALauncher.ViewModels
         public ObservableCollection<SourceDefinition> Sources { get; }
         public DelegateCommand<string> AddSourceCommand { get; }
 
+        public Visibility ListViewVisibility
+        {
+            get { return Sources.Count == 0 ? Visibility.Hidden : Visibility.Visible; }
+        }
+
         public SourcesEditorViewModel()
         {
             Sources = new ObservableCollection<SourceDefinition>();
@@ -37,6 +42,7 @@ namespace WALauncher.ViewModels
                 }
 
                 RaisePropertyChanged(nameof(Sources));
+                RaisePropertyChanged(nameof(ListViewVisibility));
             });
         }
 

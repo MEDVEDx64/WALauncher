@@ -55,7 +55,7 @@
                    Source="pack://application:,,,/WALauncher;component/Graphics/package.png"/>
         </Grid>
 
-        <TextBlock Grid.Column="1" FontSize="14" Foreground="Gray" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <TextBlock Grid.Column="1" FontSize="14" Foreground="#d000" VerticalAlignment="Center" HorizontalAlignment="Center">
             No distributions installed.
         </TextBlock>
         
