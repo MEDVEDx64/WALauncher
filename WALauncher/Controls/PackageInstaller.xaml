@@ -103,7 +103,7 @@
                         <Image Width="16" Height="16" Margin="1" RenderOptions.BitmapScalingMode="NearestNeighbor"
                                VerticalAlignment="Center" HorizontalAlignment="Center"
                                Source="pack://application:,,,/WALauncher;component/Graphics/Icons/open.png"/>
-                        <TextBlock Margin="4,0,0,0" FontStyle="Italic" VerticalAlignment="Center" Text="{Binding Name}"/>
+                        <TextBlock Margin="4,0,0,0" FontStyle="Italic" Foreground="Black" VerticalAlignment="Center" Text="{Binding Name}"/>
                     </WrapPanel>
                 </HierarchicalDataTemplate>
 
