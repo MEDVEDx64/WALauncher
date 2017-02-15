@@ -139,7 +139,10 @@ namespace WALauncher.ViewModels
         private void OnIndexChanged(object sender, ServiceMessageEventArgs e)
         {
             wapkg.RequestAvailableDistributions();
-            wapkg.RequestAvailablePackages();
+            foreach (var d in Dists)
+            {
+                wapkg.RequestAvailablePackages(d);
+            }
         }
     }
 }

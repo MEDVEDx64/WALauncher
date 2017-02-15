@@ -137,9 +137,16 @@ namespace WALauncher.Wapkg
 
                 else if (cmd == "packages-available")
                 {
+                    string distro = null;
                     var pkgs = new List<Tuple<string, uint?>>();
                     for (int i = 1; i < lines.Count; i++)
                     {
+                        if(lines[i].StartsWith("distro/"))
+                        {
+                            distro = lines[i].Split('/')[1];
+                            continue;
+                        }
+
                         var s = lines[i].Split(':');
                         uint? rev = null;
                         if(s[1] != "virtual")
@@ -150,7 +157,7 @@ namespace WALauncher.Wapkg
                         pkgs.Add(new Tuple<string, uint?>(s[0], rev));
                     }
 
-                    AvailablePackagesAccepted?.Invoke(this, new ServiceMessageEventArgs(packet, null, pkgs));
+                    AvailablePackagesAccepted?.Invoke(this, new ServiceMessageEventArgs(packet, distro, pkgs));
                 }
 
                 else if (cmd.StartsWith("dists-"))
@@ -270,9 +277,9 @@ namespace WALauncher.Wapkg
             SendWqRequest("packages", distro);
         }
 
-        public void RequestAvailablePackages()
+        public void RequestAvailablePackages(string distro)
         {
-            SendWqRequest("packages-available");
+            SendWqRequest("packages-available", distro);
         }
 
         public void RequestDistributions()

@@ -80,7 +80,7 @@ namespace WALauncher.ViewModels
 
                         ((PackageInstallerItem)i.Packages[0]).InstalledPackages = e.Packages;
                         i.Packages.Move(0, i.Packages.Count - 1);
-                        wapkg.RequestAvailablePackages();
+                        wapkg.RequestAvailablePackages(i.Name);
                         break;
                     }
                 }

@@ -24,6 +24,11 @@ namespace WALauncher.ViewModels.WapkgObjects
 
         void OnAvailablePackagesAccepted(object sender, ServiceMessageEventArgs e)
         {
+            if(e.RelatedDistribution == null || e.RelatedDistribution != targetDistro)
+            {
+                return;
+            }
+
             Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
                 AvailableItems.Clear();
