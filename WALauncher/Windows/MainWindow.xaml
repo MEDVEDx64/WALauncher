@@ -7,7 +7,8 @@
         xmlns:controls="clr-namespace:WALauncher.Controls"
         xmlns:vm="clr-namespace:WALauncher.ViewModels"
         mc:Ignorable="d"
-        Title="Worms Armageddon Launcher" Height="374" Width="448" ResizeMode="CanMinimize"
+        Title="Worms Armageddon Launcher"
+        MinHeight="384" Height="374" MinWidth="448" MaxWidth="448"
         Icon="/WALauncher;component/walauncher.ico">
 
     <Window.DataContext>
