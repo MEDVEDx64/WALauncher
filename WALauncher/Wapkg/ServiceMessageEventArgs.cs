@@ -8,7 +8,7 @@ namespace WALauncher.Wapkg
         public string RawMessage { get; }
 
         public string RelatedDistribution { get; }
-        public IReadOnlyList<Tuple<string, uint?>> Packages { get; }
+        public IReadOnlyList<Tuple<string, uint?, string>> Packages { get; }
         public IReadOnlyList<string> Distributions { get; }
         public IReadOnlyList<string> Sources { get; }
 
@@ -29,7 +29,7 @@ namespace WALauncher.Wapkg
             Text = text;
         }
 
-        public ServiceMessageEventArgs(string raw, string distro, IReadOnlyList<Tuple<string, uint?>> packages)
+        public ServiceMessageEventArgs(string raw, string distro, IReadOnlyList<Tuple<string, uint?, string>> packages)
         {
             RawMessage = raw;
             RelatedDistribution = distro;

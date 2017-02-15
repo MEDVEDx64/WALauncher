@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using WALauncher.Utils;
 using WALauncher.Wapkg;
@@ -139,7 +140,7 @@ namespace WALauncher.ViewModels
         private void OnIndexChanged(object sender, ServiceMessageEventArgs e)
         {
             wapkg.RequestAvailableDistributions();
-            foreach (var d in Dists)
+            foreach (var d in Dists.ToList())
             {
                 wapkg.RequestAvailablePackages(d);
             }

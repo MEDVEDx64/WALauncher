@@ -124,12 +124,12 @@ namespace WALauncher.Wapkg
                 if (cmd == "packages-changed")
                 {
                     var dist = lines[1].Split('/')[1];
-                    var pkgs = new List<Tuple<string, uint?>>();
+                    var pkgs = new List<Tuple<string, uint?, string>>();
                     
                     for (int i = 2; i < lines.Count; i++)
                     {
                         var s = lines[i].Split(':');
-                        pkgs.Add(new Tuple<string, uint?>(s[0], Convert.ToUInt32(s[1])));
+                        pkgs.Add(new Tuple<string, uint?, string>(s[0], Convert.ToUInt32(s[1]), null));
                     }
 
                     PackagesChanged?.Invoke(this, new ServiceMessageEventArgs(packet, dist, pkgs));
@@ -138,7 +138,7 @@ namespace WALauncher.Wapkg
                 else if (cmd == "packages-available")
                 {
                     string distro = null;
-                    var pkgs = new List<Tuple<string, uint?>>();
+                    var pkgs = new List<Tuple<string, uint?, string>>();
                     for (int i = 1; i < lines.Count; i++)
                     {
                         if(lines[i].StartsWith("distro/"))
@@ -149,12 +149,19 @@ namespace WALauncher.Wapkg
 
                         var s = lines[i].Split(':');
                         uint? rev = null;
+                        string group = null;
+
                         if(s[1] != "virtual")
                         {
                             rev = Convert.ToUInt32(s[1]);
                         }
 
-                        pkgs.Add(new Tuple<string, uint?>(s[0], rev));
+                        if(s.Length > 2 && s[2].Length > 0)
+                        {
+                            group = s[2];
+                        }
+
+                        pkgs.Add(new Tuple<string, uint?, string>(s[0], rev, group));
                     }
 
                     AvailablePackagesAccepted?.Invoke(this, new ServiceMessageEventArgs(packet, distro, pkgs));

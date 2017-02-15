@@ -98,6 +98,15 @@
                     </WrapPanel>
                 </HierarchicalDataTemplate>
 
+                <HierarchicalDataTemplate DataType="{x:Type wapkg:PackageGroup}" ItemsSource="{Binding Packages}">
+                    <WrapPanel>
+                        <Image Width="16" Height="16" Margin="1" RenderOptions.BitmapScalingMode="NearestNeighbor"
+                               VerticalAlignment="Center" HorizontalAlignment="Center"
+                               Source="pack://application:,,,/WALauncher;component/Graphics/Icons/open.png"/>
+                        <TextBlock Margin="4,0,0,0" FontStyle="Italic" VerticalAlignment="Center" Text="{Binding Name}"/>
+                    </WrapPanel>
+                </HierarchicalDataTemplate>
+
                 <HierarchicalDataTemplate DataType="{x:Type wapkg:PackageFileInstallerItem}">
                     <WrapPanel Height="20">
                         <Button Margin="1" FontSize="10" Command="{Binding OpenFileCommand}">Install</Button>

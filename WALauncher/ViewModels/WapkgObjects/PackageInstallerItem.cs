@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using WALauncher.Utils;
 using WALauncher.Wapkg;
@@ -13,7 +14,7 @@ namespace WALauncher.ViewModels.WapkgObjects
         string targetDistro = null;
 
         public ObservableCollection<object> AvailableItems { get; }
-        public IReadOnlyList<Tuple<string, uint?>> InstalledPackages { get; set; }
+        public IReadOnlyList<Tuple<string, uint?, string>> InstalledPackages { get; set; }
 
         public PackageInstallerItem(string targetDistro)
         {
@@ -31,7 +32,9 @@ namespace WALauncher.ViewModels.WapkgObjects
 
             Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
-                AvailableItems.Clear();
+                var nogroup = new List<AvailablePackage>();
+                var groups = new Dictionary<string, IList<AvailablePackage>>();
+
                 foreach (var pkg in e.Packages)
                 {
                     if(InstalledPackages != null)
@@ -49,11 +52,34 @@ namespace WALauncher.ViewModels.WapkgObjects
                         if (flag) continue;
                     }
 
-                    AvailableItems.Add(new AvailablePackage(targetDistro)
+                    ICollection<AvailablePackage> dst = nogroup;
+                    if(pkg.Item3 != null)
+                    {
+                        if(!groups.ContainsKey(pkg.Item3))
+                        {
+                            groups.Add(pkg.Item3, new List<AvailablePackage>());
+                        }
+
+                        dst = groups[pkg.Item3];
+                    }
+
+                    dst.Add(new AvailablePackage(targetDistro)
                     {
                         Name = pkg.Item1,
                         Revision = pkg.Item2 == null ? "virtual" : "r" + pkg.Item2.ToString()
                     });
+                }
+
+                AvailableItems.Clear();
+
+                foreach(var k in groups.Keys.OrderBy(x => x))
+                {
+                    AvailableItems.Add(new PackageGroup(k, groups[k].OrderBy(x => x.Name)));
+                }
+
+                foreach(var pkg in nogroup.OrderBy(x => x.Name))
+                {
+                    AvailableItems.Add(pkg);
                 }
 
                 AvailableItems.Add(new PackageFileInstallerItem(targetDistro));
