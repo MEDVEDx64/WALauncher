@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using WALauncher.Utils;
 
 namespace WALauncher.ViewModels.WapkgObjects
@@ -7,23 +7,30 @@ namespace WALauncher.ViewModels.WapkgObjects
     public class PackageGroup : ViewModelBase
     {
         public string Name { get; }
-        public IEnumerable<AvailablePackage> Packages { get; }
+        public ObservableCollection<AvailablePackage> Packages { get; }
 
-        public PackageGroup(string name, IEnumerable pkgs)
+        public PackageGroup(string name)
         {
             Name = name;
-            var packages = new List<AvailablePackage>();
+            Packages = new ObservableCollection<AvailablePackage>();
+        }
 
-            foreach(var x in pkgs)
+        public void Push(IEnumerable pkgs)
+        {
+            if(pkgs == null)
             {
-                var pkg = x as AvailablePackage;
-                if(pkg != null)
-                {
-                    packages.Add(pkg);
-                }
+                return;
             }
 
-            Packages = packages;
+            Packages.Clear();
+            foreach (var x in pkgs)
+            {
+                var pkg = x as AvailablePackage;
+                if (pkg != null)
+                {
+                    Packages.Add(pkg);
+                }
+            }
         }
     }
 }

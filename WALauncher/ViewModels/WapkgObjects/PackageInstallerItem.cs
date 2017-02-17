@@ -70,11 +70,83 @@ namespace WALauncher.ViewModels.WapkgObjects
                     });
                 }
 
-                AvailableItems.Clear();
-
                 foreach(var k in groups.Keys.OrderBy(x => x))
                 {
-                    AvailableItems.Add(new PackageGroup(k, groups[k].OrderBy(x => x.Name)));
+                    PackageGroup dstGroup = null;
+                    foreach(var x in AvailableItems)
+                    {
+                        var g = x as PackageGroup;
+                        if(g != null && g.Name == k)
+                        {
+                            dstGroup = g;
+                            break;
+                        }
+                    }
+
+                    if(dstGroup == null)
+                    {
+                        dstGroup = new PackageGroup(k);
+                        var list = new List<PackageGroup>();
+                        foreach(var x in AvailableItems)
+                        {
+                            var g = x as PackageGroup;
+                            if(g == null)
+                            {
+                                break;
+                            }
+
+                            list.Add(g);
+                        }
+
+                        if (list.Count > 0)
+                        {
+                            bool done = false;
+                            for (int i = 1; i < list.Count; i++)
+                            {
+                                if (string.Compare(list[i - 1].Name, k) < 0 && string.Compare(k, list[i].Name) < 0)
+                                {
+                                    AvailableItems.Insert(i, dstGroup);
+                                    done = true;
+                                    break;
+                                }
+                            }
+
+                            if (!done)
+                            {
+                                if (string.Compare(k, list[0].Name) < 0)
+                                {
+                                    AvailableItems.Insert(0, dstGroup);
+                                }
+                                else
+                                {
+                                    AvailableItems.Add(dstGroup);
+                                }
+                            }
+                        }
+
+                        else
+                        {
+                            AvailableItems.Add(dstGroup);
+                        }
+                    }
+
+                    dstGroup.Push(groups[k].OrderBy(x => x.Name));
+                }
+
+                foreach(var x in AvailableItems.ToList())
+                {
+                    var g = x as PackageGroup;
+                    if(g != null)
+                    {
+                        if (!groups.Keys.Contains(g.Name))
+                        {
+                            AvailableItems.Remove(x);
+                        }
+
+                        continue;
+                    }
+
+                    AvailableItems.Remove(x);
                 }
 
                 foreach(var pkg in nogroup.OrderBy(x => x.Name))
