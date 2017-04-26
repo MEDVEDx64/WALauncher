@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WALauncher.Controls"
+             xmlns:p="clr-namespace:WALauncher.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
@@ -20,7 +21,7 @@
 
         <TextBlock FontSize="10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,12,6">
             <Hyperlink NavigateUri="https://github.com/MEDVEDx64/WALauncher" RequestNavigate="OnHomepageLinkRequestNavigate" Foreground="#80FFFFFF">
-                Visit homepage for the latest version
+                <TextBlock Text="{x:Static p:Resources.TbVisitHomepage}"/>
             </Hyperlink>
         </TextBlock>
     </Grid>

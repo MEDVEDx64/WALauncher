@@ -10,3 +10,4 @@ obj
 packages
 *.bak
 wqdaemon.exe
+*.csproj.user

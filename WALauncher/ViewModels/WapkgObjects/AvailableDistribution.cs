@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using WALauncher.Properties;
 using WALauncher.Utils;
 using WALauncher.Wapkg;
 
@@ -32,7 +33,7 @@ namespace WALauncher.ViewModels.WapkgObjects
 
                 else
                 {
-                    return "Install";
+                    return Resources.BtnInstall;
                 }
             }
         }

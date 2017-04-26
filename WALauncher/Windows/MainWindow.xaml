@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:WALauncher.Windows"
         xmlns:controls="clr-namespace:WALauncher.Controls"
         xmlns:vm="clr-namespace:WALauncher.ViewModels"
+        xmlns:p="clr-namespace:WALauncher.Properties"
         mc:Ignorable="d"
         Title="Worms Armageddon Launcher"
         MinHeight="384" Height="374" MinWidth="448" MaxWidth="448"
@@ -28,16 +29,16 @@
         </Grid>
 
         <TabControl Grid.Row="1" TabStripPlacement="Bottom" BorderThickness="0,0,0,1" Margin="-2,-2,-2,0">
-            <TabItem Header="Home">
+            <TabItem Header="{x:Static p:Resources.TabHome}">
                 <controls:LauncherHome/>
             </TabItem>
-            <TabItem Header="Distro">
+            <TabItem Header="{x:Static p:Resources.TabDistro}">
                 <controls:DistributionInstaller/>
             </TabItem>
-            <TabItem Header="Packages">
+            <TabItem Header="{x:Static p:Resources.TabPackages}">
                 <controls:PackageInstaller/>
             </TabItem>
-            <TabItem Header="Sources">
+            <TabItem Header="{x:Static p:Resources.TabSources}">
                 <controls:SourcesEditor/>
             </TabItem>
         </TabControl>
@@ -61,18 +62,18 @@
                 </Grid.ColumnDefinitions>
 
                 <WrapPanel Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <Button Margin="1,0,1,0" ToolTip="Refresh" Command="{Binding RefreshCommand}">
+                    <Button Margin="1,0,1,0" ToolTip="{x:Static p:Resources.TipRefresh}" Command="{Binding RefreshCommand}">
                         <Image Width="16" Height="16" Margin="0.5,0.5,0,0" RenderOptions.BitmapScalingMode="NearestNeighbor"
                                Source="pack://application:,,,/WALauncher;component/Graphics/Icons/refresh.png"/>
                     </Button>
                     <ComboBox Name="distroBox" Margin="1,0,1,0" ItemsSource="{Binding Dists}" SelectedValue="{Binding SelectedDistro}" Width="200"/>
-                    <Button Margin="1,0,1,0" ToolTip="Open in File Explorer" Command="{Binding OpenExplorerCommand}">
+                    <Button Margin="1,0,1,0" ToolTip="{x:Static p:Resources.TipOpenExplorer}" Command="{Binding OpenExplorerCommand}">
                         <Image Width="17" Height="17" Margin="0" RenderOptions.BitmapScalingMode="NearestNeighbor"
                                Source="pack://application:,,,/WALauncher;component/Graphics/Icons/open.png"/>
                     </Button>
                 </WrapPanel>
 
-                <Button Grid.Column="1" Width="42" Height="42" ToolTip="Launch" Command="{Binding RunCommand}">
+                <Button Grid.Column="1" Width="42" Height="42" ToolTip="{x:Static p:Resources.TipLaunch}" Command="{Binding RunCommand}">
                     <Button.Background>
                         <RadialGradientBrush>
                             <GradientStop Color="#FFBBFFC7" Offset="0"/>

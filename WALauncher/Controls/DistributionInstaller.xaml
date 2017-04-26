@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:WALauncher.Controls"
              xmlns:vm="clr-namespace:WALauncher.ViewModels"
              xmlns:wapkg="clr-namespace:WALauncher.ViewModels.WapkgObjects"
+             xmlns:p="clr-namespace:WALauncher.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
@@ -42,12 +43,12 @@
                         </Grid.RowDefinitions>
                         
                         <WrapPanel Grid.Row="0">
-                            <TextBlock FontSize="18" Margin="1" Foreground="#480" Text="Install from file"/>
+                            <TextBlock FontSize="18" Margin="1" Foreground="#480" Text="{x:Static p:Resources.TbInstallFromFile}"/>
                             <Button Margin="4,1,1,1" Width="20" Command="{Binding OpenFileCommand}">...</Button>
                         </WrapPanel>
 
                         <WrapPanel Grid.Row="1">
-                            <TextBlock Margin="1" FontSize="11" Text="Suggested name:"/>
+                            <TextBlock Margin="1" FontSize="11" Text="{x:Static p:Resources.TbSuggestedName}"/>
                             <TextBox Margin="1" Width="150" FontSize="11" Text="{Binding SuggestedName}"/>
                         </WrapPanel>
                     </Grid>

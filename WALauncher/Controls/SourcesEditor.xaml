@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:WALauncher.Controls"
              xmlns:vm="clr-namespace:WALauncher.ViewModels"
              xmlns:sources="clr-namespace:WALauncher.ViewModels.Sources"
+             xmlns:p="clr-namespace:WALauncher.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
@@ -19,14 +20,12 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="24">
-            <TextBlock>
-                No sources were added.
-                <Hyperlink Command="{Binding AddSourceCommand}" CommandParameter="https://themassacre.org/worms/">
-                    Try adding one
-                </Hyperlink>
-            </TextBlock>
-        </StackPanel>
+        <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="24">
+            <Run Text="{x:Static p:Resources.TbNoSources}"/>
+            <Hyperlink Command="{Binding AddSourceCommand}" CommandParameter="https://themassacre.org/worms/">
+                <Run Text="{x:Static p:Resources.TbTryAddingOne}"/>
+            </Hyperlink>
+        </TextBlock>
         
         <ListView Grid.Row="0" BorderThickness="0,0,0,1" ItemsSource="{Binding Sources}" Visibility="{Binding ListViewVisibility}"
                   ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden">
@@ -56,13 +55,13 @@
                         </Grid.ColumnDefinitions>
 
                         <Button Grid.Column="0" Margin="1,0,1,0" Command="{Binding MoveUpCommand}"
-                                Content="&#8593;" ToolTip="Move up" Background="#64f4"/>
+                                Content="&#8593;" ToolTip="{x:Static p:Resources.BtnMoveUp}" Background="#64f4"/>
                         <Button Grid.Column="1" Margin="1,0,1,0" Command="{Binding MoveDownCommand}"
-                                Content="&#8595;" ToolTip="Move down" Background="#64f4"/>
+                                Content="&#8595;" ToolTip="{x:Static p:Resources.BtnMoveDown}" Background="#64f4"/>
                         <TextBox Grid.Column="2" Margin="1,0,1,0" BorderBrush="Transparent" Background="Transparent"
                                  IsReadOnly="True" Text="{Binding Link, Mode=OneWay}"/>
                         <Button Grid.Column="3" Margin="1,0,1,0" Command="{Binding RemoveCommand}"
-                                Content="&#215;" ToolTip="Remove" Background="#6f44"/>
+                                Content="&#215;" ToolTip="{x:Static p:Resources.BtnRemove}" Background="#6f44"/>
                     </Grid>
                 </DataTemplate>
             </ListView.Resources>
@@ -75,7 +74,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBox Grid.Column="0" Name="linkTextBox" Margin="2,1,1,0"/>
-            <Button Grid.Column="1" Margin="1,1,2,0" Content="Add" Padding="12,1,12,1"
+            <Button Grid.Column="1" Margin="1,1,2,0" Content="{x:Static p:Resources.BtnAdd}" Padding="12,1,12,1"
                     Command="{Binding AddSourceCommand}" CommandParameter="{Binding Text, ElementName=linkTextBox}"/>
         </Grid>
     </Grid>
