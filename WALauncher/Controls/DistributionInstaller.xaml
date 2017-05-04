@@ -25,9 +25,9 @@
                         </Grid.RowDefinitions>
 
                         <WrapPanel Grid.Row="0">
-                            <TextBox FontSize="18" Margin="1" BorderThickness="0" Width="360" Text="{Binding SuggestedName}"/>
+                            <TextBox FontSize="18" Margin="1" BorderThickness="0" Width="368" Text="{Binding SuggestedName}"/>
                             <Button Margin="1" IsEnabled="{Binding ButtonEnabled}" Command="{Binding InstallCommand}"
-                                    Width="41" Content="{Binding InstallButtonText}"/>
+                                    Width="33" Content="{Binding InstallButtonText}" ToolTip="{x:Static p:Resources.BtnInstall}"/>
                         </WrapPanel>
 
                         <ProgressBar Grid.Row="1" Margin="1" Minimum="0" Maximum="{Binding TotalProgress}"

@@ -94,8 +94,8 @@
 
                 <HierarchicalDataTemplate DataType="{x:Type wapkg:AvailablePackage}">
                     <WrapPanel Height="20">
-                        <Button Margin="1" FontSize="10" IsEnabled="{Binding ButtonEnabled}"
-                                Command="{Binding InstallCommand}" Content="{x:Static p:Resources.BtnInstall}"/>
+                        <Button Margin="1" FontSize="10" IsEnabled="{Binding ButtonEnabled}" Width="18" ToolTip="{x:Static p:Resources.BtnInstall}"
+                                Command="{Binding InstallCommand}" Content="+"/>
                         <Label Margin="1" Padding="1" FontSize="12" Foreground="#888" Content="{Binding Name}"/>
                         <Label Margin="1" Padding="1" FontSize="12" Foreground="#aa5" Content="{Binding Revision}"/>
                     </WrapPanel>
@@ -113,7 +113,7 @@
                 <HierarchicalDataTemplate DataType="{x:Type wapkg:PackageFileInstallerItem}">
                     <WrapPanel Height="20">
                         <Button Margin="1" FontSize="10" Command="{Binding OpenFileCommand}" Content="{x:Static p:Resources.BtnInstall}"/>
-                        <Label Height="20" Margin="1" Padding="1" FontSize="12" Foreground="#480" Content="{x:Static p:Resources.TbInstallFromFile}"/>
+                        <Label Height="20" Margin="1" Padding="1" FontSize="12" Foreground="#480" Content="{x:Static p:Resources.TbPackageFromFile}"/>
                     </WrapPanel>
                 </HierarchicalDataTemplate>
             </TreeView.Resources>
